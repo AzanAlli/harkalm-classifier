@@ -91,6 +91,7 @@ def classify_listing(client: anthropic.Anthropic, listing_text: str) -> dict:
         )
 
         raw = response.content[0].text.strip()
+        raw = raw.removeprefix("```json").removeprefix("```").removesuffix("```").strip()
         result = json.loads(raw)
 
         # Validate fields
